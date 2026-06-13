@@ -23,9 +23,29 @@
     </aside>
 
     <main class="content">
+        {{-- Notifikasi sukses --}}
+        @if (session('success'))
+            <div class="alert-success-banner" id="successAlert">
+                <span>✅ {{ session('success') }}</span>
+                <button onclick="document.getElementById('successAlert').remove()" class="alert-close">&times;</button>
+            </div>
+        @endif
+
         @yield('content')
     </main>
 </div>
+<script>
+    // Auto-dismiss notifikasi setelah 4 detik
+    const alert = document.getElementById('successAlert');
+    if (alert) {
+        setTimeout(() => {
+            alert.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            alert.style.opacity = '0';
+            alert.style.transform = 'translateY(-10px)';
+            setTimeout(() => alert.remove(), 500);
+        }, 4000);
+    }
+</script>
 
 </body>
 </html>
