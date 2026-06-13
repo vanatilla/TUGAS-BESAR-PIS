@@ -128,12 +128,69 @@
         .footer a:hover {
             text-decoration: underline;
         }
+
+        /* ===== Notification Alerts ===== */
+        .alert {
+            padding: 14px 18px;
+            border-radius: 14px;
+            font-size: 13.5px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: slideDown 0.4s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .alert-error {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #991b1b;
+        }
+
+        .alert-success {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            color: #166534;
+        }
+
+        .alert-icon {
+            font-size: 18px;
+            flex-shrink: 0;
+        }
     </style>
 </head>
 <body>
 
     <div class="auth-card">
         <h2>Task Reminder</h2>
+
+        {{-- Notifikasi sukses registrasi --}}
+        @if (session('success'))
+            <div class="alert alert-success">
+                <span class="alert-icon">✅</span>
+                <span>{{ session('success') }}</span>
+            </div>
+        @endif
+
+        {{-- Notifikasi error login --}}
+        @if ($errors->any())
+            <div class="alert alert-error">
+                <span class="alert-icon">⚠️</span>
+                <span>{{ $errors->first() }}</span>
+            </div>
+        @endif
 
         <form method="POST" action="{{ route('login') }}">
             @csrf

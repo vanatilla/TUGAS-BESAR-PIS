@@ -128,12 +128,77 @@
         .footer a:hover {
             text-decoration: underline;
         }
+
+        /* ===== Notification Alerts ===== */
+        .alert {
+            padding: 14px 18px;
+            border-radius: 14px;
+            font-size: 13.5px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            animation: slideDown 0.4s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .alert-error {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #991b1b;
+        }
+
+        .alert-success {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            color: #166534;
+        }
+
+        .alert-icon {
+            font-size: 18px;
+            flex-shrink: 0;
+            line-height: 1.4;
+        }
+
+        .alert ul {
+            margin: 0;
+            padding-left: 16px;
+        }
+
+        .alert ul li {
+            margin-bottom: 2px;
+        }
     </style>
 </head>
 <body>
 
     <div class="auth-card">
         <h2>Buat Akun</h2>
+
+        {{-- Notifikasi error validasi --}}
+        @if ($errors->any())
+            <div class="alert alert-error">
+                <span class="alert-icon">⚠️</span>
+                <div>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        @endif
 
         <form method="POST" action="{{ route('bene') }}">
             @csrf
