@@ -14,6 +14,7 @@
     <tr>
         <th>Judul</th>
         <th>Isi Catatan</th>
+        <th>File</th>
         <th>Aksi</th>
     </tr>
 
@@ -21,6 +22,15 @@
     <tr>
         <td>{{ $note->title }}</td>
         <td>{{ $note->content }}</td>
+        <td>
+            @if ($note->file_path)
+                <a href="{{ asset('storage/' . $note->file_path) }}" target="_blank" class="file-link">
+                    📎 {{ basename($note->file_path) }}
+                </a>
+            @else
+                <span style="color: #94a3b8;">-</span>
+            @endif
+        </td>
         <td class="action-group">
             <a href="{{ route('notes.edit', $note->id) }}"
                class="btn btn-warning">

@@ -246,3 +246,61 @@ h1 {
 .alert-close:hover {
     opacity: 1;
 }
+
+/* =====================
+   FILE UPLOAD
+===================== */
+.file-input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #cbd5f5;
+    font-size: 14px;
+    background: #f8fafc;
+    cursor: pointer;
+}
+
+.file-input:hover {
+    border-color: #2563eb;
+}
+
+.file-link {
+    color: #2563eb;
+    text-decoration: none;
+    font-size: 13px;
+    word-break: break-all;
+}
+
+.file-link:hover {
+    text-decoration: underline;
+}
+
+.current-file {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 10px;
+    padding: 10px 14px;
+    margin-bottom: 10px;
+    font-size: 13px;
+}
+
+.current-file a {
+    color: #2563eb;
+    text-decoration: none;
+}
+
+.current-file a:hover {
+    text-decoration: underline;
+}
+
+.remove-file-label {
+    color: #dc2626;
+    font-size: 13px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}

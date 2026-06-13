@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Note;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class NoteController extends Controller
 {
@@ -23,13 +24,20 @@ class NoteController extends Controller
     {
         $request->validate([
             'title'   => 'required',
-            'content' => 'required'
+            'content' => 'required',
+            'file'    => 'nullable|file|max:10240', // max 10MB
         ]);
 
+        $filePath = null;
+        if ($request->hasFile('file')) {
+            $filePath = $request->file('file')->store('notes_files', 'public');
+        }
+
         Note::create([
-            'user_id' => auth()->id(),
-            'title'   => $request->title,
-            'content' => $request->content
+            'user_id'   => auth()->id(),
+            'title'     => $request->title,
+            'content'   => $request->content,
+            'file_path' => $filePath,
         ]);
 
         return redirect()->route('notes.index');
@@ -46,13 +54,32 @@ class NoteController extends Controller
     {
         $request->validate([
             'title'   => 'required',
-            'content' => 'required'
+            'content' => 'required',
+            'file'    => 'nullable|file|max:10240',
         ]);
 
-        $note->update([
+        $data = [
             'title'   => $request->title,
-            'content' => $request->content
-        ]);
+            'content' => $request->content,
+        ];
+
+        if ($request->hasFile('file')) {
+            // Hapus file lama kalau ada
+            if ($note->file_path) {
+                Storage::disk('public')->delete($note->file_path);
+            }
+            $data['file_path'] = $request->file('file')->store('notes_files', 'public');
+        }
+
+        // Kalau user centang hapus file
+        if ($request->has('remove_file')) {
+            if ($note->file_path) {
+                Storage::disk('public')->delete($note->file_path);
+            }
+            $data['file_path'] = null;
+        }
+
+        $note->update($data);
 
         return redirect()->route('notes.index')
                          ->with('success', 'Catatan berhasil diperbarui');
@@ -61,6 +88,11 @@ class NoteController extends Controller
     /* ================= DELETE ================= */
     public function destroy(Note $note)
     {
+        // Hapus file kalau ada
+        if ($note->file_path) {
+            Storage::disk('public')->delete($note->file_path);
+        }
+
         $note->delete();
 
         return redirect()->route('notes.index')
