@@ -9,8 +9,8 @@
 }
 
 body {
-    background: #f1f5f9;
-    color: #0f172a;
+    background: #0f172a;
+    color: #e2e8f0;
 }
 
 a {
@@ -68,11 +68,13 @@ a {
 .content {
     flex: 1;
     padding: 32px;
+    background: #0f172a;
 }
 
 h1 {
     font-size: 28px;
     margin-bottom: 24px;
+    color: #f1f5f9;
 }
 
 /* =====================
@@ -85,21 +87,23 @@ h1 {
 }
 
 .card {
-    background: white;
+    background: #1e293b;
     padding: 24px;
     border-radius: 16px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    border: 1px solid #334155;
 }
 
 .card h3 {
     font-size: 14px;
-    color: #64748b;
+    color: #94a3b8;
 }
 
 .card p {
     font-size: 32px;
     font-weight: bold;
     margin-top: 8px;
+    color: #f1f5f9;
 }
 
 /* =====================
@@ -107,22 +111,25 @@ h1 {
 ===================== */
 .table {
     width: 100%;
-    background: white;
+    background: #1e293b;
     border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    border: 1px solid #334155;
 }
 
 .table th {
-    background: #f8fafc;
+    background: #162033;
     padding: 16px;
     text-align: left;
     font-size: 14px;
+    color: #94a3b8;
 }
 
 .table td {
     padding: 16px;
-    border-top: 1px solid #e2e8f0;
+    border-top: 1px solid #334155;
+    color: #e2e8f0;
 }
 
 /* =====================
@@ -160,11 +167,12 @@ h1 {
    FORM
 ===================== */
 .form-container {
-    background: white;
+    background: #1e293b;
     padding: 28px;
     border-radius: 18px;
     max-width: 600px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    border: 1px solid #334155;
 }
 
 .form-group {
@@ -176,6 +184,7 @@ h1 {
     font-weight: 600;
     display: block;
     margin-bottom: 6px;
+    color: #e2e8f0;
 }
 
 .form-group input,
@@ -183,14 +192,17 @@ h1 {
     width: 100%;
     padding: 12px;
     border-radius: 10px;
-    border: 1px solid #cbd5f5;
+    border: 1px solid #475569;
+    background: #0f172a;
+    color: #f1f5f9;
     font-size: 14px;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: #2563eb;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
 }
 
 /* =====================
@@ -254,18 +266,19 @@ h1 {
     width: 100%;
     padding: 10px;
     border-radius: 10px;
-    border: 1px solid #cbd5f5;
+    border: 1px solid #475569;
     font-size: 14px;
-    background: #f8fafc;
+    background: #0f172a;
+    color: #e2e8f0;
     cursor: pointer;
 }
 
 .file-input:hover {
-    border-color: #2563eb;
+    border-color: #3b82f6;
 }
 
 .file-link {
-    color: #2563eb;
+    color: #60a5fa;
     text-decoration: none;
     font-size: 13px;
     word-break: break-all;
@@ -279,16 +292,17 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #f0fdf4;
-    border: 1px solid #bbf7d0;
+    background: #162033;
+    border: 1px solid #334155;
     border-radius: 10px;
     padding: 10px 14px;
     margin-bottom: 10px;
     font-size: 13px;
+    color: #e2e8f0;
 }
 
 .current-file a {
-    color: #2563eb;
+    color: #60a5fa;
     text-decoration: none;
 }
 
