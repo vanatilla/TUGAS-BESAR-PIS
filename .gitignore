@@ -1,0 +1,26 @@
+# Laravel
+/TUBES_WAD/TUBES_WAD/vendor/
+/TUBES_WAD/TUBES_WAD/node_modules/
+/TUBES_WAD/TUBES_WAD/.env
+/TUBES_WAD/TUBES_WAD/storage/*.key
+/TUBES_WAD/TUBES_WAD/storage/framework/cache/data/*
+/TUBES_WAD/TUBES_WAD/storage/framework/sessions/*
+/TUBES_WAD/TUBES_WAD/storage/framework/views/*
+/TUBES_WAD/TUBES_WAD/public/hot
+/TUBES_WAD/TUBES_WAD/public/storage
+/TUBES_WAD/TUBES_WAD/public/build/
+
+# Python
+generate_test_cases.py
+__pycache__/
+*.pyc
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+Thumbs.db
+.DS_Store
