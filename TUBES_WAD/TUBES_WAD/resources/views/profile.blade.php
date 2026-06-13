@@ -13,10 +13,11 @@
         body {
             margin: 0;
             min-height: 100vh;
-            background: #f9fafb;
+            background: #0f172a;
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
         }
 
         .profile-card {
@@ -126,16 +127,27 @@
         }
 
         .back-link {
-            display: block;
-            text-align: center;
+            position: fixed;
+            top: 28px;
+            left: 32px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
             font-size: 14px;
-            color: #6b7280;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(8px);
+            transition: 0.3s;
         }
 
         .back-link:hover {
-            text-decoration: underline;
-            color: #111827;
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateX(-2px);
         }
     </style>
 </head>
@@ -175,11 +187,11 @@
             </form>
         </div>
 
-        <a href="{{ route('dashboard') }}" class="back-link">
-            ← Kembali ke Dashboard
-        </a>
-
     </div>
+
+    <a href="{{ route('dashboard') }}" class="back-link">
+        ← Kembali
+    </a>
 
 </body>
 </html>
