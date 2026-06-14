@@ -11,31 +11,35 @@ class TaskApiController extends Controller
     // ===============================
     // GET /api/tasks
     // ===============================
-    public function index()
+    public function index(Request $request)
     {
+        $tasks = Task::where('user_id', $request->user()->id)
+                     ->orderBy('deadline', 'asc')
+                     ->get();
+
         return response()->json([
             'status' => true,
-            'data' => Task::all()
+            'data'   => $tasks,
         ], 200);
     }
 
     // ===============================
     // GET /api/tasks/{id}
     // ===============================
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        $task = Task::find($id);
+        $task = Task::where('user_id', $request->user()->id)->find($id);
 
         if (!$task) {
             return response()->json([
-                'status' => false,
-                'message' => 'Task tidak ditemukan'
+                'status'  => false,
+                'message' => 'Task tidak ditemukan',
             ], 404);
         }
 
         return response()->json([
             'status' => true,
-            'data' => $task
+            'data'   => $task,
         ], 200);
     }
 
@@ -45,21 +49,22 @@ class TaskApiController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|string|max:255',
-            'deadline' => 'required|date'
+            'title'       => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'deadline'    => 'required|date',
         ]);
 
         $task = Task::create([
-            'user_id' => 1, // dummy user (tanpa auth API)
-            'title' => $request->title,
+            'user_id'     => $request->user()->id,
+            'title'       => $request->title,
             'description' => $request->description,
-            'deadline' => $request->deadline
+            'deadline'    => $request->deadline,
         ]);
 
         return response()->json([
-            'status' => true,
+            'status'  => true,
             'message' => 'Task berhasil ditambahkan',
-            'data' => $task
+            'data'    => $task,
         ], 201);
     }
 
@@ -68,47 +73,53 @@ class TaskApiController extends Controller
     // ===============================
     public function update(Request $request, $id)
     {
-        $task = Task::find($id);
+        $task = Task::where('user_id', $request->user()->id)->find($id);
 
         if (!$task) {
             return response()->json([
-                'status' => false,
-                'message' => 'Task tidak ditemukan'
+                'status'  => false,
+                'message' => 'Task tidak ditemukan',
             ], 404);
         }
 
+        $request->validate([
+            'title'       => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'deadline'    => 'required|date',
+        ]);
+
         $task->update([
-            'title' => $request->title ?? $task->title,
-            'description' => $request->description ?? $task->description,
-            'deadline' => $request->deadline ?? $task->deadline
+            'title'       => $request->title,
+            'description' => $request->description,
+            'deadline'    => $request->deadline,
         ]);
 
         return response()->json([
-            'status' => true,
+            'status'  => true,
             'message' => 'Task berhasil diupdate',
-            'data' => $task
+            'data'    => $task,
         ], 200);
     }
 
     // ===============================
     // DELETE /api/tasks/{id}
     // ===============================
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        $task = Task::find($id);
+        $task = Task::where('user_id', $request->user()->id)->find($id);
 
         if (!$task) {
             return response()->json([
-                'status' => false,
-                'message' => 'Task tidak ditemukan'
+                'status'  => false,
+                'message' => 'Task tidak ditemukan',
             ], 404);
         }
 
         $task->delete();
 
         return response()->json([
-            'status' => true,
-            'message' => 'Task berhasil dihapus'
+            'status'  => true,
+            'message' => 'Task berhasil dihapus',
         ], 200);
     }
 }
